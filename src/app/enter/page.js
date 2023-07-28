@@ -1,26 +1,25 @@
 'use client'
-import { signInWithPopup } from "firebase/auth";
-import { auth, googleProvider } from "../../../lib/firebase";
+import { signInWithPopup, signOut } from 'firebase/auth';
+import { googleProvider, auth } from '../../../lib/firebase';
+import { useContext } from 'react';
+import { UserContext } from '../../../lib/context';
 
-export default function Enter() {
-  const user = null;
-  const username = null;
+export default function Enter(props) {
+
+  const { user, username } = useContext(UserContext)
 
   return (
     <main>
-      {user ? (
-        !username ? (
-          <UsernameForm />
-        ) : (
-          <SignOutButton />
-        )
-      ) : (
+      {user ? 
+        !username ? <UsernameForm /> : <SignOutButton /> 
+        : 
         <SignInButton />
-      )}
+      }
     </main>
   );
 }
 
+// Sign in with Google button
 function SignInButton() {
   const signInWithGoogle = async () => {
     await signInWithPopup(auth, googleProvider);
@@ -28,7 +27,7 @@ function SignInButton() {
 
   return (
     <button className="btn-google" onClick={signInWithGoogle}>
-      <img /> Sign in with Google
+      <img src={'/google.png'} /> Sign in with Google
     </button>
   );
 }
