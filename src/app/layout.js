@@ -4,6 +4,9 @@ import Navbar from "../../components/Navbar";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { UserContext } from "../../lib/context";
+import { useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useUserData } from "../../lib/hooks";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,10 +17,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
 
+  const userData = useUserData();
+
   return (
     <html lang="en">
       <body className={inter.className}>
-        <UserContext.Provider value={{ user: {}, username: 'jeff' }}>
+        <UserContext.Provider value={userData}>
           <Navbar />
           {children}
           <Toaster />

@@ -3,10 +3,10 @@ import { useContext } from "react";
 import { UserContext } from "../lib/context";
 
 export default function Navbar() {
-  /*   const { user, username } = useContext(UserContext);
-   */
-  const user = null;
-  const username = null;
+  const { user, username } = useContext(UserContext);
+
+  console.log("tessssss", user)
+
   return (
     <nav className="navbar">
       <ul>
@@ -15,7 +15,7 @@ export default function Navbar() {
             <button>FEED</button>
           </Link>
         </li>
-        {username && (
+        {user && (
           <>
             <li className="push-left">
               <Link href={"/admin"}>
@@ -24,10 +24,9 @@ export default function Navbar() {
             </li>
             <li>
               <Link href={`${username}`}>
-                <img src={user?.photoURL}>Profile</img>
+                <img src={user.photoURL}></img>
               </Link>
-            </li>{" "}
-            *
+            </li>
           </>
         )}
         {!username && (
